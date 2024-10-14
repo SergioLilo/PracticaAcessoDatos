@@ -7,6 +7,7 @@ import java.nio.file.Paths;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class FiltradorLog {
     public static void main(String[] args) {
@@ -22,6 +23,9 @@ public class FiltradorLog {
             fichero=Files.readAllLines(ruta);
 
             exportacionArchivo(fichero, listaLogs);
+            seleccionNivel(listaLogs);
+
+            ExportacionJSON.exportJSON(listaLogs);
             ExportacionXML.exportXML(listaLogs);
 
             System.out.println(listaLogs);
@@ -44,6 +48,42 @@ public class FiltradorLog {
             listaLogs.add(new Log(partes[0],partes[1],partes[2] ));
             //listaLogs.add(new Log());
         }
+    }
+    private static void seleccionNivel(List<Log> listaLogs){
+        Scanner teclado=new Scanner(System.in);
+        String[] opciones= {"NINGUNO", "INFO", "WARNING", "ERROR"};
+        String opc;
+        boolean opcionValida = false;
+
+        do {
+            System.out.println("Escriba el nivel para filtrar");
+            System.out.println("1.NINGUNO: no habrá filtro\n" +
+                    "2.INFO\n" +
+                    "3.WARNING\n" +
+                    "4.ERROR\n" +
+                    "Escriba el nombre del nivel:");
+            opc = teclado.next().toUpperCase();
+
+
+            for (String level : opciones) {
+                if (opc.equals(level)) {
+                    opcionValida = true;
+                }
+            }
+            if (!opcionValida){
+                System.out.println("OPCION INCORRECTA, ESCRIBELA DE NUEVO");
+            }
+        }while (!opcionValida);
+
+
+        for (Log logs: listaLogs){
+            if (!logs.getNivel().equals(opc)){
+
+            }
+
+        }
+
+
     }
 
 }
