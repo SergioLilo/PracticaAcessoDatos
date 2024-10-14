@@ -11,7 +11,6 @@ public class LogAplication {
    private List<Log> listaLog;
 
 
-
     public LogAplication() {
     }
     public LogAplication(List<Log> listaLogs) {
