@@ -16,7 +16,7 @@ public class LogAplication {
     public LogAplication(List<Log> listaLogs) {
         this.listaLog = listaLogs;
     }
-    @XmlElement
+    @XmlElement(name = "log")
     public List<Log> getListaLog() {
         return listaLog;
     }
