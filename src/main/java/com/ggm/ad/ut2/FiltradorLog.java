@@ -14,10 +14,14 @@ import java.util.regex.Pattern;
 public class FiltradorLog {
     public static void main(String[] args) {
 
+        Scanner teclado=new Scanner(System.in);
+        String decision;
         List<String> fichero=new ArrayList<>();
         List<Log> listaLogs=new ArrayList<>();
         List<Log> listaLogsFiltrada=new ArrayList<>();
         int lineasNoValidas=0;
+
+        boolean terminarPrograma=false;
 
         try {
             String rutaFichero = "src/main/log_ejemplo.log";
@@ -26,11 +30,19 @@ public class FiltradorLog {
             fichero=Files.readAllLines(ruta);
             lineasNoValidas=exportacionArchivo(fichero, listaLogs,lineasNoValidas);
 
+            while (!terminarPrograma){
+                listaLogsFiltrada=seleccionNivel(listaLogs);
+                System.out.println(listaLogsFiltrada);
+                seleccionExportacion(listaLogsFiltrada);
+                System.out.println(listaLogs);
 
-            listaLogsFiltrada=seleccionNivel(listaLogs);
-            System.out.println(listaLogsFiltrada);
-            seleccionExportacion(listaLogsFiltrada);
-            System.out.println(listaLogs);
+                System.out.println("Quiere Terminar el programa? si/no");
+                decision=teclado.next();
+                if (decision.equals("si")){
+                    terminarPrograma=true;
+                }
+            }
+
 
             System.out.println("Numero de lineas no validas: "+lineasNoValidas);
 
@@ -62,7 +74,7 @@ public class FiltradorLog {
                 listaLogs.add(new Log(partes[0], partes[1], partes[2]));
             }else{
                 lineasNoValidas++;
-                System.out.println(linea);
+
             }
         }
 
