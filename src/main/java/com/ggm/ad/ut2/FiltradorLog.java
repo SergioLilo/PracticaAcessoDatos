@@ -25,10 +25,11 @@ public class FiltradorLog {
 
         try {
             String rutaFichero = "src/main/log_ejemplo.log";
-            Path ruta=Paths.get(rutaFichero);
-            Files.exists(ruta);
+            Path ruta=comprobadorRuta();
+
             fichero=Files.readAllLines(ruta);
             lineasNoValidas=exportacionArchivo(fichero, listaLogs,lineasNoValidas);
+
 
             while (!terminarPrograma){
                 listaLogsFiltrada=seleccionNivel(listaLogs);
@@ -54,6 +55,20 @@ public class FiltradorLog {
 
     }
 
+    private static Path comprobadorRuta(){
+
+        String rutaFichero;
+        Scanner teclado=new Scanner(System.in);
+        System.out.println("Introduce la ruta de tu archivo:");
+        rutaFichero=teclado.next();
+        while (!Files.exists(Path.of(rutaFichero))){
+            System.out.println("no existe el fichero, introduce su ruta de nuevo: ");
+            rutaFichero=teclado.next();
+        }
+
+        Path ruta=Paths.get(rutaFichero);
+        return ruta;
+    }
     private static int exportacionArchivo(List<String> fichero, List<Log> listaLogs, int lineasNoValidas) {
         String partes[];
         String patron = "^\\[\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}\\] \\[(ERROR|INFO|WARNING)\\] .+$";
