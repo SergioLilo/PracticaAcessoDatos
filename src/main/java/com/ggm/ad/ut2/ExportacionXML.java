@@ -5,11 +5,14 @@ import jakarta.xml.bind.JAXBException;
 import jakarta.xml.bind.Marshaller;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.List;
 
 public class ExportacionXML {
 
-    public  static  void exportXML( List<Log> listaLogs){
+    public  static  void exportXML( List<Log> listaLogs) throws IOException {
 
         try {
 
@@ -23,6 +26,7 @@ public class ExportacionXML {
             LogAplication logAplication=new LogAplication(listaLogs);
 
             marshaller.marshal(logAplication,logXML);
+
 
 
 

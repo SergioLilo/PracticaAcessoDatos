@@ -9,6 +9,7 @@
 [2024-09-16 15:16:57] [INFO] Archivo no encontrado
 [2024-09-16 15:11:57] [WARNING] Usuario inició sesión
 [2024-09-16 15:10:57] [ERROR] Archivo no encontrado
+dffsdfsd
 [2024-09-16 15:00:57] [WARNING] Archivo no encontrado
 [2024-09-16 14:50:57] [INFO] Error en la conexión a la base de datos
 [2024-09-16 14:46:57] [WARNING] Solicitud procesada correctamente
@@ -18,10 +19,12 @@
 [2024-09-16 14:24:57] [WARNING] Usuario inició sesión
 [2024-09-16 14:15:57] [ERROR] Autenticación fallida
 [2024-09-16 14:05:57] [WARNING] Autenticación fallida
+[2024-09-16 14:05:57] [WARNI] Autenticación fallida
 [2024-09-16 14:02:57] [WARNING] Conexión establecida
 [2024-09-16 13:54:57] [INFO] Tiempo de espera agotado
 [2024-09-16 13:53:57] [ERROR] Autenticación fallida
 [2024-09-16 13:50:57] [ERROR] Archivo no encontrado
+[2024-09-16 14:057] [WARNING] Autenticación fallida
 [2024-09-16 13:46:57] [WARNING] Solicitud procesada correctamente
 [2024-09-16 13:43:57] [ERROR] Error en la conexión a la base de datos
 [2024-09-16 13:34:57] [WARNING] Autenticación fallida
