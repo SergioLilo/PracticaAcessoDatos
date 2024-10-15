@@ -33,8 +33,10 @@ public class FiltradorLog {
 
             while (!terminarPrograma){
                 listaLogsFiltrada=seleccionNivel(listaLogs);
+                System.out.println("Logs Filtrados: ");
                 System.out.println(listaLogsFiltrada);
                 seleccionExportacion(listaLogsFiltrada);
+                System.out.println("Logs Sin Filtrado: ");
                 System.out.println(listaLogs);
 
                 System.out.println("Quiere Terminar el programa? si/no");
@@ -157,6 +159,7 @@ public class FiltradorLog {
                 if (logs.getNivel().equals(opc)) {
                     listaLogFiltrada.add(logs);
                 }
+
             }
         } else {
             return listaLogs;
