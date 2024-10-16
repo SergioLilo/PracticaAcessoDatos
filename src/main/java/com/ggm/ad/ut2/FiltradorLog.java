@@ -15,7 +15,7 @@ public class FiltradorLog {
     public static void main(String[] args) {
 
         Scanner teclado=new Scanner(System.in);
-        String decision;
+
         List<String> fichero=new ArrayList<>();
         List<Log> listaLogs=new ArrayList<>();
         List<Log> listaLogsFiltrada=new ArrayList<>();
@@ -24,27 +24,18 @@ public class FiltradorLog {
         boolean terminarPrograma=false;
 
         try {
-            String rutaFichero = "src/main/log_ejemplo.log";
-            Path ruta=comprobadorRuta();
 
+            Path ruta=comprobadorRuta();
             fichero=Files.readAllLines(ruta);
             lineasNoValidas=exportacionArchivo(fichero, listaLogs,lineasNoValidas);
 
-
-            while (!terminarPrograma){
                 listaLogsFiltrada=seleccionNivel(listaLogs);
                 System.out.println("Logs Filtrados: ");
                 System.out.println(listaLogsFiltrada);
                 seleccionExportacion(listaLogsFiltrada);
-                System.out.println("Logs Sin Filtrado: ");
-                System.out.println(listaLogs);
 
-                System.out.println("Quiere Terminar el programa? si/no");
-                decision=teclado.next();
-                if (decision.equals("si")){
-                    terminarPrograma=true;
-                }
-            }
+
+               lineasNoValidas=menu(fichero,listaLogs,lineasNoValidas,listaLogsFiltrada);
 
 
             System.out.println("Numero de lineas no validas: "+lineasNoValidas);
@@ -57,6 +48,53 @@ public class FiltradorLog {
 
     }
 
+    private static int menu(List<String> fichero, List<Log> listaLogs, int lineasNoValidas, List<Log> listaLogsFiltrada) throws IOException {
+        Scanner teclado=new Scanner(System.in);
+        int opc=0;
+
+        while (opc!=6){
+            System.out.println("1.Cargar fichero log\n" +
+                    "2.Filtrado por nivel\n" +
+                    "3.Exportar a XML\n" +
+                    "4.Exportar a JSON\n" +
+                    "5.Resetear Filtro\n" +
+                    "6.Salir\n" +
+                    "elegir opcion(Numero): ");
+            opc=teclado.nextInt();
+            if (opc==1){
+                fichero.clear();
+                listaLogs.clear();
+                listaLogsFiltrada.clear();
+
+                Path ruta=comprobadorRuta();
+                fichero=Files.readAllLines(ruta);
+                lineasNoValidas=exportacionArchivo(fichero, listaLogs,lineasNoValidas);
+
+
+                listaLogsFiltrada.addAll(listaLogs);
+                System.out.println(listaLogsFiltrada);
+            }if (opc==2){
+                listaLogsFiltrada=seleccionNivel(listaLogs);
+                System.out.println("Logs Filtrados: ");
+                System.out.println(listaLogsFiltrada);
+            }if(opc==3){
+                ExportacionXML.exportXML(listaLogsFiltrada);
+                System.out.println("EXPORTACION COMPLETA");
+            }if(opc==4){
+                ExportacionJSON.exportJSON(listaLogsFiltrada);
+                System.out.println("EXPORTACION COMPLETA");
+            }if (opc==5){
+                listaLogsFiltrada.clear();
+                listaLogsFiltrada.addAll(listaLogs);
+                System.out.println("FILTRO RESETEADO");
+                System.out.println("Logs Sin Filtrado: ");
+                System.out.println(listaLogs);
+            }
+
+        }
+        return lineasNoValidas;
+
+    }
     private static Path comprobadorRuta(){
 
         String rutaFichero;
@@ -94,8 +132,6 @@ public class FiltradorLog {
 
             }
         }
-
-        System.out.println(lineasNoValidas);
         return lineasNoValidas;
     }
     private static void seleccionExportacion(List<Log> listaLogs) throws IOException {
